@@ -41,5 +41,15 @@ class DirectedGraphTest extends FunSpec {
             assert(nodes.contains("Madrid"))
             assert(nodes.size == 3)
         }
+        it("should be able to iterate over all nodes of the graph using BFS approach") {
+            val d = new DirectedGraph[String](Map.empty[String, List[String]])
+            val d1 = d.addEdge("London", "Lisbon").addEdge("London", "Madrid")
+            var nodes = scala.collection.mutable.Set.empty[String]
+            Traversal.traverseBFS("London", d1, (s: String) => nodes.add(s))
+            assert(nodes.contains("London"))
+            assert(nodes.contains("Lisbon"))
+            assert(nodes.contains("Madrid"))
+            assert(nodes.size == 3)
+        }
     }
 }
